@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Games</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root[data-theme="light"] {
+            --primary-color: #1a73e8;
+            --secondary-color: #4285f4;
+            --accent-color: #34a853;
+            --text-color: #202124;
+            --bg-color: #ffffff;
+            --card-bg: #f8f9fa;
+            --nav-bg: #1a73e8;
+            --nav-text: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        :root[data-theme="dark"] {
+            --primary-color: #4285f4;
+            --secondary-color: #669df6;
+            --accent-color: #34a853;
+            --text-color: #e8eaed;
+            --bg-color: #202124;
+            --card-bg: #2d2e31;
+            --nav-bg: #202124;
+            --nav-text: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .theme-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: var(--card-bg);
+            padding: 10px;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            transition: all 0.3s ease;
+            width: 60px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5px;
+        }
+
+        .theme-switch:hover {
+            transform: scale(1.05);
+        }
+
+        .theme-switch i {
+            font-size: 1em;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .switch-slider {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            left: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-switch.dark .switch-slider {
+            left: 33px;
+        }
+
+        .theme-switch.dark .fa-sun {
+            color: var(--primary-color);
+        }
+
+        .theme-switch:not(.dark) .fa-moon {
+            color: var(--primary-color);
+        }
+
+        .nav-menu {
+            background-color: var(--nav-bg);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu.scrolled {
+            padding: 10px 0;
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            color: var(--nav-text);
+            font-size: 1.5em;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--nav-text);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            margin-top: 80px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .game-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            transition: all 0.3s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--shadow-color);
+        }
+
+        .game-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .game-info {
+            padding: 20px;
+        }
+
+        .game-title {
+            font-size: 1.5em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .game-description {
+            color: var(--text-color);
+            margin-bottom: 15px;
+        }
+
+        .game-link {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--nav-text);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .game-link:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-switch" onclick="toggleTheme()">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+        <div class="switch-slider"></div>
+    </div>
+
+    <nav class="nav-menu">
+        <div class="nav-container">
+            <a href="resume.html" class="nav-logo">Portfolio</a>
+            <div class="nav-links">
+                <a href="resume.html">Home</a>
+                <a href="resume.html#about">About Me</a>
+                <a href="resume.html#experience">Experiences</a>
+                <a href="games.html">Games</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>My Games</h1>
+        <div class="games-grid">
+            <div class="game-card">
+                <img src="concert-demo.png" alt="Arena Concert" class="game-image">
+                <div class="game-info">
+                    <h2 class="game-title">Arena Concert</h2>
+                    <p class="game-description">A concert game made in Impact Arena.</p>
+                    <a href="https://www.roblox.com/games/7179280798/Arena-Concert-POP-ROCK" class="game-link" target="_blank">Play Game</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="bkk-gang.png" alt="Bangkok RP" class="game-image">
+                <div class="game-info">
+                    <h2 class="game-title">Bangkok RP</h2>
+                    <p class="game-description">Revolutionizing Roleplay games with a simple, yet realistic Bangkok game with all Roleplay elements.</p>
+                    <a href="bangkok-rp.html" class="game-link" target="_blank">Learn more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme switcher
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeSwitch = document.querySelector('.theme-switch');
+            
+            if (html.getAttribute('data-theme') === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                themeSwitch.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                html.setAttribute('data-theme', 'light');
+                themeSwitch.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Initialize theme from localStorage
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const html = document.documentElement;
+            const themeSwitch = document.querySelector('.theme-switch');
+            
+            html.setAttribute('data-theme', savedTheme);
+            if (savedTheme === 'dark') {
+                themeSwitch.classList.add('dark');
+            }
+        }
+
+        // Call initializeTheme when page loads
+        initializeTheme();
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('.nav-menu');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html> 
