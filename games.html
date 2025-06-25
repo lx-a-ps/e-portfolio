@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Games</title>
+    <title>My Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -266,6 +266,10 @@
             transition: 0.3s;
         }
         @media (max-width: 430px) {
+            .theme-switch {
+                top: 15px;
+                right: 70px;
+            }
             .nav-links {
                 display: none;
                 position: absolute;
@@ -284,6 +288,8 @@
             }
             .hamburger {
                 display: flex;
+                position: relative;
+                z-index: 1002;
             }
         }
     </style>
@@ -305,9 +311,10 @@
             </div>
             <div class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="index.html#about">About Me</a>
+                <a href="resume.html">Resume</a>
                 <a href="games.html">Games</a>
-                <a href="contact.html">Contact</a>
+                <a href="bangkok-rp.html">Bangkok RP</a>
+                <a href="classes.html">Classes</a>
             </div>
         </div>
     </nav>
