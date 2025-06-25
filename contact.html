@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Me</title>
+    <title>Contact Me - Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -43,7 +43,7 @@
             background-color: var(--bg-color);
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-
+        
         .theme-switch {
             position: fixed;
             top: 20px;
@@ -63,16 +63,6 @@
             padding: 0 5px;
         }
 
-        .theme-switch:hover {
-            transform: scale(1.05);
-        }
-
-        .theme-switch i {
-            font-size: 1em;
-            color: var(--primary-color);
-            transition: all 0.3s ease;
-        }
-
         .switch-slider {
             position: absolute;
             width: 24px;
@@ -87,14 +77,6 @@
             left: 33px;
         }
 
-        .theme-switch.dark .fa-sun {
-            color: var(--primary-color);
-        }
-
-        .theme-switch:not(.dark) .fa-moon {
-            color: var(--primary-color);
-        }
-
         .nav-menu {
             background-color: var(--nav-bg);
             padding: 15px 0;
@@ -103,13 +85,6 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 10px var(--shadow-color);
-            transition: all 0.3s ease;
-        }
-
-        .nav-menu.scrolled {
-            padding: 10px 0;
-            background-color: var(--nav-bg);
-            backdrop-filter: blur(10px);
         }
 
         .nav-container {
@@ -126,11 +101,6 @@
             font-size: 1.5em;
             text-decoration: none;
             font-weight: bold;
-            transition: transform 0.3s ease;
-        }
-
-        .nav-logo:hover {
-            transform: scale(1.05);
         }
 
         .nav-links {
@@ -144,158 +114,123 @@
             padding: 8px 16px;
             border-radius: 20px;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--secondary-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::before {
-            width: 100%;
-        }
-
-        .nav-links a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 20px;
-            margin-top: 80px;
+            margin-top: 100px;
         }
 
         h1 {
             color: var(--primary-color);
-            margin-bottom: 30px;
-            font-size: 2.5em;
+            margin-bottom: 40px;
+            font-size: 2.8em;
             text-align: center;
         }
-
-        .contact-info {
+        
+        .contact-info-container {
             background: var(--card-bg);
-            border-radius: 15px;
             padding: 40px;
+            border-radius: 15px;
             box-shadow: 0 5px 15px var(--shadow-color);
-            transition: all 0.3s ease;
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
         }
 
-        .contact-info:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px var(--shadow-color);
-        }
-
-        .contact-item {
+        .contact-info-item {
             display: flex;
             align-items: center;
-            margin-bottom: 25px;
-            padding: 15px;
-            border-radius: 10px;
-            background: var(--bg-color);
-            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            font-size: 1.2em;
         }
 
-        .contact-item:hover {
-            transform: translateX(10px);
-            box-shadow: 0 5px 15px var(--shadow-color);
-        }
-
-        .contact-icon {
-            font-size: 1.5em;
+        .contact-info-item i {
             color: var(--primary-color);
+            font-size: 1.5em;
             margin-right: 20px;
-            width: 40px;
+            width: 30px;
             text-align: center;
         }
 
-        .contact-details {
-            flex: 1;
-        }
-
-        .contact-label {
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-
-        .contact-value {
+        .contact-info-item a {
             color: var(--text-color);
-        }
-
-        .contact-value a {
-            color: var(--primary-color);
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
-        .contact-value a:hover {
-            color: var(--secondary-color);
+        .contact-info-item a:hover {
+            color: var(--primary-color);
+        }
+        
+        .fa-line { 
+            color: #00B900;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-
-            .contact-info {
-                padding: 20px;
-            }
+        /* Modal Styles */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1002; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.6); 
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s;
         }
 
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
+        .modal-content {
+            background-color: var(--card-bg);
+            margin: 15% auto;
+            padding: 30px;
+            border: 1px solid var(--primary-color);
+            width: 90%;
+            max-width: 400px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            animation: slideIn 0.4s;
+        }
+
+        .modal-content h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .close-button {
+            color: var(--text-color);
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
             cursor: pointer;
-            z-index: 1100;
+            transition: color 0.3s;
         }
-        .hamburger span {
-            display: block;
-            width: 28px;
-            height: 4px;
-            margin: 4px 0;
-            background: var(--nav-text);
-            border-radius: 2px;
-            transition: 0.3s;
+
+        .close-button:hover {
+            color: var(--primary-color);
         }
-        @media (max-width: 430px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 60px;
-                right: 20px;
-                background: var(--nav-bg);
-                flex-direction: column;
-                gap: 0;
-                width: 180px;
-                border-radius: 12px;
-                box-shadow: 0 4px 16px var(--shadow-color);
-                padding: 10px 0;
-            }
-            .nav-links.open {
-                display: flex;
-            }
-            .hamburger {
-                display: flex;
-            }
+
+        #qrCodeImg {
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        @keyframes slideIn {
+            from {transform: translateY(-50px); opacity: 0;}
+            to {transform: translateY(0); opacity: 1;}
         }
     </style>
 </head>
@@ -305,132 +240,96 @@
         <i class="fas fa-sun"></i>
         <div class="switch-slider"></div>
     </div>
-
+    
     <nav class="nav-menu">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">Portfolio</a>
-            <div class="hamburger" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
             <div class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="index.html#about">About Me</a>
+                <a href="resume.html">Resume</a>
                 <a href="games.html">Games</a>
+                <a href="bangkok-rp.html">Bangkok RP</a>
+                <a href="classes.html">Classes</a>
                 <a href="contact.html">Contact</a>
             </div>
         </div>
     </nav>
-
+    
     <div class="container">
         <h1>Contact Me</h1>
-        <div class="contact-info">
-            <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fas fa-envelope"></i>
-                </div>
-                <div class="contact-details">
-                    <div class="contact-label">Email</div>
-                    <div class="contact-value">
-                        <a href="mailto:22712@ps.ac.th">22712@ps.ac.th</a>
-                    </div>
-                </div>
+        <div class="contact-info-container">
+            <div class="contact-info-item">
+                <i class="fas fa-envelope"></i>
+                <span><a href="mailto:22712@ps.ac.th">22712@ps.ac.th</a></span>
             </div>
-
-            <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fas fa-phone"></i>
-                </div>
-                <div class="contact-details">
-                    <div class="contact-label">Phone</div>
-                    <div class="contact-value">
-                        <a href="tel:+66986694225">+66 98 669 4225</a>
-                    </div>
-                </div>
+            <div class="contact-info-item">
+                <i class="fas fa-phone"></i>
+                <span>+66 98 669 4225</span>
             </div>
-
-            <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fab fa-line"></i>
-                </div>
-                <div class="contact-details">
-                    <div class="contact-label">Line</div>
-                    <div class="contact-value">
-                        <a href="https://line.me/ti/p/~0610238188" target="_blank">0610238188</a>
-                    </div>
-                </div>
+            <div class="contact-info-item">
+                <i class="fab fa-line"></i>
+                <span><a href="#" id="line-qr-link">0610238188</a></span>
             </div>
-
-            <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fab fa-github"></i>
-                </div>
-                <div class="contact-details">
-                    <div class="contact-label">GitHub</div>
-                    <div class="contact-value">
-                        <a href="https://github.com/lx-a-ps" target="_blank">github.com/lx-a-ps</a>
-                    </div>
-                </div>
+            <div class="contact-info-item">
+                <i class="fab fa-github"></i>
+                <span><a href="https://github.com/lx-a-ps" target="_blank" rel="noopener noreferrer">lx-a-ps</a></span>
             </div>
-
-            <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                </div>
-                <div class="contact-details">
-                    <div class="contact-label">Location</div>
-                    <div class="contact-value">PotisarnPittayakorn, Taling Chan, Bangkok, Thailand</div>
-                </div>
+            <div class="contact-info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>PotisarnPittayakorn School</span>
             </div>
         </div>
     </div>
 
+    <div id="qrModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Scan to add me on Line</h2>
+            <img id="qrCodeImg" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://line.me/ti/p/~0610238188" alt="Line QR Code">
+            <p>Or use Line ID: 0610238188</p>
+        </div>
+    </div>
+
     <script>
-        // Theme switcher
         function toggleTheme() {
             const html = document.documentElement;
-            const themeSwitch = document.querySelector('.theme-switch');
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
             
-            if (html.getAttribute('data-theme') === 'light') {
-                html.setAttribute('data-theme', 'dark');
-                themeSwitch.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                html.setAttribute('data-theme', 'light');
-                themeSwitch.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
+            const themeSwitch = document.querySelector('.theme-switch');
+            themeSwitch.classList.toggle('dark');
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'dark') {
+            document.querySelector('.theme-switch').classList.add('dark');
+        }
+
+        // Modal logic
+        const modal = document.getElementById("qrModal");
+        const lineLink = document.getElementById("line-qr-link");
+        const closeBtn = document.querySelector(".close-button");
+
+        if (lineLink) {
+            lineLink.onclick = function(event) {
+                event.preventDefault(); // Prevent default link behavior
+                modal.style.display = "block";
             }
         }
 
-        // Initialize theme from localStorage
-        function initializeTheme() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            const html = document.documentElement;
-            const themeSwitch = document.querySelector('.theme-switch');
-            
-            html.setAttribute('data-theme', savedTheme);
-            if (savedTheme === 'dark') {
-                themeSwitch.classList.add('dark');
+        if (closeBtn) {
+            closeBtn.onclick = function() {
+                modal.style.display = "none";
             }
         }
 
-        // Call initializeTheme when page loads
-        initializeTheme();
-
-        // Add scroll effect to navigation
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('.nav-menu');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
             }
-        });
-
-        function toggleMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.classList.toggle('open');
         }
     </script>
 </body>
